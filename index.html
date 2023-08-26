@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>Libary</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-div"><p>Books read:</p><p class="books-read">0</p></div>
+            <div class="header-div"><p>Books to read:</p><p class="books-to-read">0</p></div>
+            <div class="header-div"><p>Total books:</p><p class="books-total">0</p></div>
+            <button class="add-new-book">Add new</button>
+        </div>
+        <div class="main">
+        </div>    
+        <dialog class="dialog">
+            <form action="submit">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title">
+                <label for="author">Author</label>
+                <input type="text" name="author", id="author">
+                <label for="pages">Pages</label>
+                <input type="number" name="pages" id="pages">
+                <label for="status">Readed</label>
+                <input type="checkbox" id="status" name="status">
+                <div class="buttons">
+                    <button type="submit" value="default" class="submit-btn">Submit</button>
+                    <button value="cancel" formmethod="dialog" class="close-btn">Cancel</button>
+                </div>
+            </form>
+        </dialog>
+    <script src="script.js"></script>
+</body>
+</html>
