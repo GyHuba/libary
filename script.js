@@ -10,26 +10,36 @@ const pagesDOM = document.querySelector('#pages');
 const statusDOM = document.querySelector('#status');
 const mainDOM = document.querySelector('.main');
 
-let myLibrary = [
-    {
-        title: "Rich Dad Poor Dad",
-        author: "Robert Kiyosaki",
-        pages: 352,
-        status: "off",
-    },
-    {
-        title: "The 5am club",
-        author: "Robin Sharma",
-        pages: 241,
-        status: "on",
-    },
-    {
-        title: "Make Your Bed",
-        author: "William H. McRaven",
-        pages: 312,
-        status: "on",
+
+function getLibary(){
+    if (getDatas() === null){
+        let myLibrary = [
+            {
+                title: "Rich Dad Poor Dad",
+                author: "Robert Kiyosaki",
+                pages: 352,
+                status: "off",
+            },
+            {
+                title: "The 5am club",
+                author: "Robin Sharma",
+                pages: 241,
+                status: "on",
+            },
+            {
+                title: "Make Your Bed",
+                author: "William H. McRaven",
+                pages: 312,
+                status: "on",
+            }
+        ];
+        setData(myLibrary);
     }
-];
+    else if(getDatas() !== null){
+        let myLibrary = getDatas();
+        return myLibrary;
+    }
+}
 
 function Book(title, author, pages, status) {
     this.title = title;
@@ -46,9 +56,11 @@ function Book(title, author, pages, status) {
 
 function addBookToLibrary(e) {
     e.preventDefault();
+    let myLibrary = getDatas();
     if (titleDOM.value === "" || authorDOM.value === "" || pagesDOM.value === "") return;
     else {
         myLibrary.push(new Book(titleDOM.value, authorDOM.value, pagesDOM.value, statusDOM));
+        setData(myLibrary);
 
         titleDOM.value = "";
         authorDOM.value = "";
@@ -106,9 +118,10 @@ function fillUpMain(array) {
         let delBtn = document.createElement('i');
         delBtn.classList.add("fa", "fa-trash");
         delBtn.addEventListener('click', (e) => {
-            newArray = myLibrary.filter((book) => book != myLibrary[idx])
-            myLibrary = newArray;
-            fillUpMain(myLibrary)
+            let myLibrary = getDatas();
+            newArray = myLibrary.filter((book) => book != myLibrary[idx]);
+            setData(newArray)
+            fillUpMain(getDatas())
         })
 
         cardDOM.append(title, author, pages, status, delBtn);
@@ -118,7 +131,7 @@ function fillUpMain(array) {
 }
 
 function fillUpHeader() {
-    booksTotalDOM.innerHTML = myLibrary.length
+    booksTotalDOM.innerHTML = getDatas().length
 
     let readBooks = 0;
     let booksStatus = document.querySelectorAll('.status');
@@ -126,7 +139,7 @@ function fillUpHeader() {
         if (bookstat.classList.value === "status read") readBooks++;
     })
     booksReadDOM.innerHTML = readBooks;
-    booksToReadDOM.innerHTML = myLibrary.length - readBooks
+    booksToReadDOM.innerHTML = getDatas().length - readBooks
 }
 
 addNewBookBtn.addEventListener('click', () => {
@@ -135,9 +148,22 @@ addNewBookBtn.addEventListener('click', () => {
 
 submitBtn.addEventListener('click', (e) => {
     addBookToLibrary(e)
-    fillUpMain(myLibrary);
+    fillUpMain(getDatas());
 })
-fillUpMain(myLibrary);
+
+fillUpMain(getLibary());
+
+function getDatas(){
+    return JSON.parse(localStorage.getItem('libary'))
+ }
+ 
+function setData(data){
+     localStorage.setItem('libary', JSON.stringify(data))
+ }
+ 
+function clearDatas(){
+     localStorage.clear();
+ }
 
 
 
