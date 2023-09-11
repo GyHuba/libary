@@ -93,6 +93,7 @@ dialog{
 
 .fa-trash{
     cursor: pointer;
+    align-self: center;
 }
 
 
@@ -104,10 +105,24 @@ dialog{
     background-color: red;
     display: flex;
     justify-content: center;
+    align-self: center;
 }
 
 .read{
     background-color: green;
+}
+
+/*Responsive design */
+
+@media screen and (max-width: 500px){
+    .container{
+        min-width: 100vw;
+    }
+    .header-div{
+        flex-direction: column;
+        align-items: center;
+        border-right: 1px solid black;
+    }
 }
 
 
